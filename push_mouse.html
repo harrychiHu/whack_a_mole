@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        box-sizing: border-box;
+      }
+      body {
+        background-color: lightblue;
+      }
+      h3 {
+        text-align: center;
+        margin: 2rem;
+        font-size: 2rem;
+        color: lightseagreen;
+      }
+      .main {
+        width: 600px;
+        height: 600px;
+        margin: auto;
+        display: grid;
+        grid-template-columns: 200px 200px 200px;
+        grid-template-rows: 200px 200px 200px;
+      }
+      .main :hover {
+        cursor: url('./imgs/push.ico'), pointer;
+      }
+      .item {
+        width: 100%;
+        height: 100%;
+        position: relative;
+      }
+      .item img {
+        width: 97%;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        display: none;
+      }
+      .item .mouse {
+        width: 65%;
+      }
+      .item .hole {
+        position: absolute;
+        top: 80%;
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+    <h3>
+      分數：
+      <span class="score">0</span>
+    </h3>
+    <div class="main">
+      <div class="item">
+        <img src="./imgs/hole.png" alt="" class="hole" />
+        <img src="./imgs/mouse.png" alt="" class="mouse" />
+        <img src="./imgs/boom.png" alt="" class="boom" />
+      </div>
+      <div class="item">
+        <img src="./imgs/hole.png" alt="" class="hole" />
+        <img src="./imgs/mouse.png" alt="" class="mouse" />
+        <img src="./imgs/boom.png" alt="" class="boom" />
+      </div>
+      <div class="item">
+        <img src="./imgs/hole.png" alt="" class="hole" />
+        <img src="./imgs/mouse.png" alt="" class="mouse" />
+        <img src="./imgs/boom.png" alt="" class="boom" />
+      </div>
+      <div class="item">
+        <img src="./imgs/hole.png" alt="" class="hole" />
+        <img src="./imgs/mouse.png" alt="" class="mouse" />
+        <img src="./imgs/boom.png" alt="" class="boom" />
+      </div>
+      <div class="item">
+        <img src="./imgs/hole.png" alt="" class="hole" />
+        <img src="./imgs/mouse.png" alt="" class="mouse" />
+        <img src="./imgs/boom.png" alt="" class="boom" />
+      </div>
+      <div class="item">
+        <img src="./imgs/hole.png" alt="" class="hole" />
+        <img src="./imgs/mouse.png" alt="" class="mouse" />
+        <img src="./imgs/boom.png" alt="" class="boom" />
+      </div>
+      <div class="item">
+        <img src="./imgs/hole.png" alt="" class="hole" />
+        <img src="./imgs/mouse.png" alt="" class="mouse" />
+        <img src="./imgs/boom.png" alt="" class="boom" />
+      </div>
+      <div class="item">
+        <img src="./imgs/hole.png" alt="" class="hole" />
+        <img src="./imgs/mouse.png" alt="" class="mouse" />
+        <img src="./imgs/boom.png" alt="" class="boom" />
+      </div>
+      <div class="item">
+        <img src="./imgs/hole.png" alt="" class="hole" />
+        <img src="./imgs/mouse.png" alt="" class="mouse" />
+        <img src="./imgs/boom.png" alt="" class="boom" />
+      </div>
+    </div>
+  </body>
+  <script>
+    let mouseLists = document.querySelectorAll('.mouse')
+    let scoreBox = document.querySelector('.score')
+    //積分
+    let score = 0
+    for (i = 0; i < mouseLists.length; i++) {
+      //給每個老鼠綁定事件
+      //當點擊老鼠的時候
+      //1.讓老鼠消失
+      //2.讓 boom 出現
+      //3.讓積分改變
+      mouseLists[i].onclick = function () {
+        this.style.display = 'none'
+        this.parentElement.lastElementChild.style.display = 'block'
+        let _that = this
+        score += 100
+        // 260毫秒之後，讓boom自動消失
+        let timer = setTimeout(function () {
+          clearTimeout(timer)
+          timer = null
+          _that.parentElement.lastElementChild.style.display = 'none'
+        }, 260)
+        scoreBox.innerHTML = score
+      }
+    }
+
+    setInterval(function () {
+      // 0-1 , 得到的範圍是 0-8
+      let i = Math.floor(Math.random() * 9)
+      mouseLists[i].style.display = 'block'
+    }, 1000)
+  </script>
+</html>
